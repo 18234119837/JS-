@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/demoo.css">
+<link rel="stylesheet" href="css/style8.css">
+	<style>
+		html{
+			width: 100%;
+			height: 100%;
+		}
+		body{
+			width: 100%;
+			height: 100%;
+			background: #fff;
+			overflow: hidden;
+		}
+		img{
+			width: 450px!important;
+			height: 250px!important;
+		}
+.carousel{
+	perspective:3000px;
+}
+
+	</style>
+</head>
+<body>
+<h2 style="line-height: 100px;color: #fff;">&nbsp;</h2>
+
+	<div class="carousel" data-gap="20">
+		<figure>
+			<!--天猫 小米 移动 企业 五子棋 打字游戏 记事本-->
+
+			<a href="../projects/tmall/tianmao.html" target="_blank">
+				<img src="img/tianmao.jpg" alt="">
+			</a>
+			<a href="../projects/xiaomi/xiaomi.html" target="_blank">
+				<img src="img/xiaoxiaomi.jpg" alt="">
+			</a>
+			<a href="../projects/yidong/yidong.html" target="_blank">
+				<img src="img/yidongdong.jpg" alt="">
+			</a>
+			<a href="../projects/qiye/qiye-index.html" target="_blank">
+				<img src="img/qiyeqiye.jpg" alt="">
+			</a>
+			<a href="../projects/wuziqi/wuziqi.html" target="_blank">
+				<img src="img/wuziqi-pc.jpg" alt="">
+			</a>
+			<a href="../projects/daziyouxi/dazi.html" target="_blank">
+				<img src="img/dazi(1).jpg" alt="">
+			</a>
+			<a href="../projects/todo/todolist.html" target="_blank">
+				<img src="img/tianmao.jpg" alt="">
+			</a>
+			<a href="../projects/yidong/yidong.html" target="_blank">
+				<img src="img/tianmao.jpg" alt="">
+			</a>
+		</figure>
+		<nav>
+			<button class="nav prev">Prev</button>
+			<button class="nav next">Next</button>
+		</nav>
+	</div>
+
+
+<script type="text/javascript">
+	window.addEventListener('load', function () {
+		var carousels = document.querySelectorAll('.carousel');
+		for (var i = 0; i < carousels.length; i++) {
+			carousel(carousels[i]);
+		}
+	});
+	function carousel(root) {
+		var figure = root.querySelector('figure'),
+			nav = root.querySelector('nav'),
+			images = figure.children,
+			n = images.length,
+			gap = root.dataset.gap || 0,
+			bfc = 'bfc' in root.dataset,
+			theta = 2 * Math.PI / n,
+			currImage = 0;
+
+		setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
+		window.addEventListener('resize', function () {
+			setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
+		});
+		setupNavigation();
+		function setupCarousel(n, s) {
+			var apothem = s / (2 * Math.tan(Math.PI / n));
+
+			figure.style.transformOrigin = '50% 50% ' + -apothem + 'px';
+
+			for (var i = 0; i < n; i++) {
+				images[i].style.padding = gap + 'px';
+			}for (i = 1; i < n; i++) {
+				images[i].style.transformOrigin = '50% 50% ' + -apothem + 'px';
+				images[i].style.transform = 'rotateY(' + i * theta + 'rad)';
+			}
+			if (bfc) for (i = 0; i < n; i++) {
+				images[i].style.backfaceVisibility = 'hidden';
+			}rotateCarousel(currImage);
+		}
+		function setupNavigation() {
+			nav.addEventListener('click', onClick, true);
+			function onClick(e) {
+				e.stopPropagation();
+				var t = e.target;
+				if (t.tagName.toUpperCase() != 'BUTTON') return;
+
+				if (t.classList.contains('next')) {
+					currImage++;
+				} else {
+					currImage--;
+				}
+				rotateCarousel(currImage);
+			}
+		}
+		function rotateCarousel(imageIndex) {
+			figure.style.transform = 'rotateY(' + imageIndex * -theta + 'rad)';
+		}
+	}
+</script>
+<!--</div>-->
+
+</body>
+</html>
