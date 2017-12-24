@@ -466,6 +466,7 @@ section{
 .five-left{
     width: 400px;
     height: 100%;
+    margin-left: 400px;
 }
 .five-right{
     width: 500px;
