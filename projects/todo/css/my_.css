@@ -60,7 +60,7 @@ body{
 .done.active{
     background: #F15358;
     color:white;
-    font-size:.4rem ;
+    font-size:.35rem ;
 }
 .wait.active{
     background: #F15358;
